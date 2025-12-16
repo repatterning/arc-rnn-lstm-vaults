@@ -50,8 +50,8 @@ if __name__ == '__main__':
     specific = src.specific.Specific()
     parser = argparse.ArgumentParser()
     parser.add_argument('paths', type=specific.paths,
-                        help='Expects a string of one or more comma separated Amazon Simple Storage '
-                             'Service paths, i.e., directory paths; format s3://{bucket.name}/{prefix.string}/')
+                        help=('Expects a string of one or more comma separated Amazon Simple Storage '
+                              'Service paths, i.e., directory paths; format s3://{bucket.name}/{prefix.string}/'))
     args = parser.parse_args()
 
     connector: boto3.session.Session
