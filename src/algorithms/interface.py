@@ -1,5 +1,6 @@
 """Module interface.py"""
 import logging
+
 import src.s3.directives
 
 
@@ -28,4 +29,5 @@ class Interface:
             else:
                 logging.info(('%s: Deletion failure; is the path an Amazon Simple Storage '
                               'Service uniform resource locator path?'))
-                raise f'{path} is not a valid path.  The expected format is s3://bucket.name/prefix.string/'
+                logging.error('%s is not a valid path.  The expected format is s3://bucket.name/prefix.string/',
+                              path)
