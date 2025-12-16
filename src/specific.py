@@ -11,7 +11,7 @@ class Specific:
         pass
 
     @staticmethod
-    def paths(value: str=None) -> list[int] | None:
+    def paths(value: str=None) -> list[str] | None:
         """
 
         :param value:
@@ -25,7 +25,7 @@ class Specific:
         elements = [e.strip() for e in value.split(',')]
 
         try:
-            _paths = [int(element) for element in elements]
+            _paths = [str(element) for element in elements]
         except argparse.ArgumentTypeError as err:
             raise err from err
 
