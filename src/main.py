@@ -1,4 +1,5 @@
 """Module main.py"""
+import argparse
 import datetime
 import logging
 import os
@@ -18,15 +19,9 @@ def main():
     logger: logging.Logger = logging.getLogger(__name__)
     logger.info('Starting: %s', datetime.datetime.now().isoformat(timespec='microseconds'))
 
-    # Assets
-    specifications = src.data.interface.Interface(service=service, s3_parameters=s3_parameters).exc()
-
-    # Evaluating
-    src.predictions.interface.Interface().exc(specifications=specifications)
-
-    # Transfer
-    src.transfer.interface.Interface(
-      connector=connector, service=service, s3_parameters=s3_parameters).exc()
+    # Deleting paths ...
+    if args.paths is not None:
+        src.algorithms.interface.Interface().__call__(paths=args.paths)
 
     # Delete Cache Points
     src.functions.cache.Cache().exc()
@@ -45,13 +40,19 @@ if __name__ == '__main__':
                         datefmt='%Y-%m-%d %H:%M:%S')
 
     # Modules
-    import src.data.interface
+    import src.algorithms.interface
     import src.elements.service as sr
     import src.elements.s3_parameters as s3p
     import src.functions.cache
-    import src.predictions.interface
     import src.preface.interface
-    import src.transfer.interface
+    import src.specific
+
+    specific = src.specific.Specific()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('paths', type=specific.paths,
+                        help=('Expects a string of one or more comma separated Amazon Simple Storage '
+                              'Service paths, i.e., directory paths; format s3://{bucket.name}/{prefix.string}/'))
+    args = parser.parse_args()
 
     connector: boto3.session.Session
     s3_parameters: s3p

@@ -35,11 +35,25 @@ class Directives:
         # Create the destination directory
         self.__directories.create(path=target)
 
-        # Hence
+        # Destination & Source
         destination = target.replace(os.getcwd() + os.path.sep, '')
-
         source = f"s3://{source_bucket}/{origin}"
+
+        # Hence
         state = subprocess.run(f"aws s3 sync {source} {destination}", shell=True, check=True)
+
+        return state.returncode
+
+    @staticmethod
+    def delete(path: str) -> int:
+        """
+
+        :param path: s3://{bucket.name}/{prefix.string}/
+        :return:
+        """
+
+        # Hence
+        state = subprocess.run(f"aws s3 rm {path} --recursive", shell=True, check=True)
 
         return state.returncode
 
@@ -59,6 +73,6 @@ class Directives:
         # Hence
         destination = target.replace(os.getcwd() + os.path.sep, '')
         source = f"s3://{source_bucket}/{origin}/"
-        state = subprocess.run(f"aws s3 cp {source} {destination}{os.sep} --recursive", shell=True, check=True)
+        state = subprocess.run(f"aws s3 cp {source} {destination}/ --recursive", shell=True, check=True)
 
         return state.returncode
