@@ -1,14 +1,6 @@
 <br>
 
-arc-rnn-lstm-vaults
-
-<br>
-
-Running:
-
-```shell
-python src/main.py "s3://{bucket.name}/{prefix.string}/, ..."
-```
+**arc-rnn-lstm-vaults**
 
 <br>
 <br>
