@@ -4,8 +4,10 @@ arc-rnn-lstm-vaults
 
 <br>
 
+Running:
+
 ```shell
-python src/main.py "s3://{bucket.name}/{prefix.string}/, s3://{bucket.name}/{prefix.string}/, ..."
+python src/main.py "s3://{bucket.name}/{prefix.string}/, ..."
 ```
 
 <br>
