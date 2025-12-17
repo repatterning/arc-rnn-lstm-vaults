@@ -28,6 +28,6 @@ class Interface:
                 logging.info('%s deleted? %s', path, state == 0)
             else:
                 logging.info(('%s: Deletion failure; is the path an Amazon Simple Storage '
-                              'Service uniform resource locator path?'))
+                              'Service uniform resource locator path?'), path)
                 logging.error('%s is not a valid path.  The expected format is s3://bucket.name/prefix.string/',
                               path)
